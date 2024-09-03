@@ -37,24 +37,36 @@ public class LetraA {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Solicita ao usuário que insira uma string
-        System.out.println("Digite uma palavra: ");
-        
-        // Recebe o valor do usuário
-        String letter = sc.nextLine();
-        
-        // Converte o texto ou palavra recebida para minúsculo
-        String lowerCaseLetter = toLowerCase(letter);
-        
-        // Conta o número da quantidade que apareceu a letra 'a'
-        long count = countLetterA(lowerCaseLetter);
-        
-        // Estrutura de decisão para visualizar o resultado.
-        System.out.println("A letra 'a' " + 
-        (count > 0 ? "ocorre " + count + " vezes" : "não foi encontrada") + 
-        " na string.");
+        try {
+            // Solicita ao usuário que insira uma string
+            System.out.println("Digite uma palavra: ");
+            
+            // Recebe o valor do usuário
+            String letter = sc.nextLine();
 
-        sc.close();
+            // Verifica se a string contém números
+            if (letter.matches(".*\\d.*")) {
+                throw new IllegalArgumentException("A string não deve conter números.");
+            }
+            
+            // Converte o texto ou palavra recebida para minúsculo
+            String lowerCaseLetter = toLowerCase(letter);
+            
+            // Conta o número da quantidade que apareceu a letra 'a'
+            long count = countLetterA(lowerCaseLetter);
+            
+            // Estrutura de decisão para visualizar o resultado.
+            System.out.println("A letra 'a' " + 
+            (count > 0 ? "ocorre " + count + " vezes" : "não foi encontrada") + 
+            " na string.");
+            
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao processar a entrada. Por favor, tente novamente.");
+        } finally {
+            sc.close();
+        }
                 
     }
 }

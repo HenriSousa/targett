@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.stream.Stream;
+import java.util.InputMismatchException;
 
 /**
  * Fibonacci
@@ -31,15 +32,21 @@ public class Fibonacci {
         // Instância do Scanner para receber um valor do usuário.
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Informe o número que deseja saber se pertence a sequência de Fibonacci: ");
-        // Variavel do tipo inteiro para armazenar o valor do usuário.
-        int numero = sc.nextInt();
-        
-        // Estrutura de decisão para visualizar o resultado.
-        System.out.println("O número " + numero + 
-        (isFibonacci(numero) ? " pertence" : " não pertence") + 
-        " à sequência de Fibonacci.");
-
-        sc.close();
+        try {
+            System.out.println("Informe o número que deseja saber se pertence a sequência de Fibonacci: ");
+            // Variavel do tipo inteiro para armazenar o valor do usuário.
+            int numero = sc.nextInt();
+            
+            // Estrutura de decisão para visualizar o resultado.
+            System.out.println("O número " + numero + 
+            (isFibonacci(numero) ? " pertence" : " não pertence") + 
+            " à sequência de Fibonacci.");
+            
+            // Exception caso o usuário digite um tipo diferente de inteiro.
+        } catch (InputMismatchException e) {
+            System.out.println("Erro: O valor informado não é um número inteiro válido.");
+        } finally {
+            sc.close();
     }
+}
 }
